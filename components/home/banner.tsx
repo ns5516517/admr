@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 const Banner = () => {
 	return (
-		<section className="bg-foreground text-background 2xl:py-20 xl:py-16 lg:py-12 md:py-8 sm:py-4 py-3 relative overflow-clip">
+		<section className="bg-foreground text-background 2xl:py-20 xl:py-16 lg:py-12 md:py-8 py-5 relative overflow-clip">
 			<div className="absolute size-101.25 -top-30 -left-30 blur-[240px] bg-primary" />
 			<div className="absolute size-101.25 -translate-1/2 top-1/2 -left-20 blur-[240px] bg-secondary" />
 			<div className="container mx-auto px-3 relative">
