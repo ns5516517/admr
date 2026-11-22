@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { siteName, siteOpenGraph, siteUrl } from "@/lib/site-metadata";
 import SiteFooter from "@/components/shared/site-footer";
+import SiteHeader from "@/components/shared/site-header";
 import { homeIntroBootstrap, homeIntroFirstPaint } from "@/components/home/home-intro-settings";
 
 const nunitoSansHeading = Nunito_Sans({subsets:['latin'],variable:'--font-heading'});
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: homeIntroBootstrap }} />
       </head>
       <body className="min-h-full flex flex-col">
+        <SiteHeader />
         <main id="site-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
         <SiteFooter />
       </body>

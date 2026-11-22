@@ -1,5 +1,5 @@
 import anthurium from "@/public/anthurium-noida.jpg";
-import globe from "@/public/globe.png";
+import { LocationsReveal, LocationRevealCard } from "./locations-reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -262,38 +262,19 @@ function HeadquartersCard() {
 
 export default function Locations() {
 	return (
-		<section aria-labelledby="locations-heading" className="bg-surface">
-			<div className="@container/locations container mx-auto flex flex-col gap-8 px-2.5 py-6 md:py-8 lg:py-12 xl:py-16 2xl:py-20 lg:gap-12 xl:gap-16 2xl:gap-20">
-				<header className="mx-auto flex max-w-3xl flex-col gap-3 text-center sm:gap-4">
-					<h2
-						id="locations-heading"
-						className="text-2xl leading-tight font-extrabold tracking-tight text-secondary md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
-					>
-						Strategic Locations{" "}
-						<span className="text-primary">Across India</span>
-					</h2>
-					<p className="mx-auto max-w-2xl text-base leading-relaxed text-foreground md:text-lg">
-						Unified physical infrastructure powering integrated media buying,
-						multi-city releasing, and PR across key enterprise and growth
-						corridors.
-					</p>
-				</header>
+		<LocationsReveal>
+			<div className="@container/locations container mx-auto px-2.5 py-6 md:py-8 lg:py-12 xl:py-16 2xl:py-20">
 				<div className="grid gap-4 @min-[40rem]/locations:grid-cols-2 @min-[58rem]/locations:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] @min-[58rem]/locations:grid-rows-2 lg:gap-6">
-					<HeadquartersCard />
-					{hubs.map((hub) => (
-						<RegionalHubCard key={hub.name} {...hub} />
+					<LocationRevealCard index={0} className="col-span-full @min-[58rem]/locations:col-span-1 @min-[58rem]/locations:row-span-2">
+						<HeadquartersCard />
+					</LocationRevealCard>
+					{hubs.map((hub, index) => (
+						<LocationRevealCard key={hub.name} index={index + 1}>
+							<RegionalHubCard {...hub} />
+						</LocationRevealCard>
 					))}
 				</div>
 			</div>
-			<div className="relative aspect-2/1 min-h-36 max-h-144 overflow-hidden mx-auto">
-				<Image
-					src={globe}
-					alt="Globe marking Ahmedabad, Uttar Pradesh, and Lucknow"
-					fill
-					sizes="100vw"
-					className="object-cover object-top"
-				/>
-			</div>
-		</section>
+		</LocationsReveal>
 	);
 }

@@ -1,0 +1,121 @@
+.locations-reveal {
+	--locations-scroll-distance: 230svh;
+}
+.locations-reveal-track {
+	position: absolute;
+	inset: 0 auto auto 0;
+	height: var(--locations-scroll-distance);
+	width: 1px;
+	pointer-events: none;
+}
+.locations-reveal-stage {
+	position: relative;
+	min-height: 100svh;
+	overflow: clip;
+}
+.locations-globe-space {
+	/* Include the globe's top margin and approximately 65% of its diameter. */
+	height: min(64vw, 768px);
+}
+.locations-globe-position {
+	position: absolute;
+	inset: 0 0 auto;
+	pointer-events: none;
+}
+.locations-globe {
+	position: relative;
+	width: min(100%, 1200px);
+	aspect-ratio: 1;
+	margin: auto;
+}
+.locations-globe canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.locations-globe[data-globe-interactive] canvas {
+	pointer-events: auto;
+	cursor: grab;
+	touch-action: pan-y pinch-zoom;
+}
+.locations-globe[data-dragging] canvas {
+	cursor: grabbing;
+}
+.locations-globe canvas:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: -4px;
+}
+.locations-globe-label {
+	pointer-events: none;
+	position: absolute;
+	z-index: 1;
+	translate: 8px -50%;
+	padding: 4px 9px;
+	border-radius: 999px;
+	font-size: clamp(10px, 1.2vw, 14px);
+	font-weight: 700;
+	white-space: nowrap;
+}
+.locations-globe-label[data-globe-label="ahmedabad"] {
+	translate: calc(-100% - 8px) 70%;
+}
+.locations-globe-label[data-globe-label="lucknow"] {
+	translate: 10px 80%;
+}
+.locations-globe-fallback {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	text-align: center;
+}
+.locations-globe[data-webgl-ready] .locations-globe-fallback {
+	display: none;
+}
+.locations-globe:not([data-webgl-ready]) .locations-globe-label {
+	display: none;
+}
+.locations-reveal:not([data-locations-motion]) .locations-final {
+	opacity: 1 !important;
+}
+.locations-reveal:not([data-locations-motion]) .locations-placeholder {
+	display: none;
+}
+.locations-reveal:not([data-locations-motion]) .locations-globe-position {
+	position: relative;
+	transform: none !important;
+	height: min(64vw, 768px);
+	overflow: clip;
+}
+.locations-reveal:not([data-locations-motion]) .locations-globe-space {
+	display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+	.locations-reveal-stage {
+		position: sticky;
+		top: 0;
+	}
+	.locations-reveal-runway {
+		height: var(--locations-scroll-distance);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.locations-reveal-track,
+	.locations-reveal-runway,
+	.locations-placeholder {
+		display: none;
+	}
+	.locations-final,
+	.locations-globe-label {
+		opacity: 1 !important;
+	}
+	.locations-globe-position {
+		position: relative;
+		transform: none !important;
+		height: min(64vw, 768px);
+		overflow: clip;
+	}
+	.locations-globe-space {
+		display: none;
+	}
+}
