@@ -1,20 +1,9 @@
-import globe from "@/public/globe.png";
 import { Building2, Mail, PhoneCall } from "lucide-react";
-import Image from "next/image";
 import CampaignBrief from "./campaign-brief";
 
 export default function Campaign() {
 	return (
 		<section aria-labelledby="campaign-heading" className="bg-surface text-foreground">
-			<div className="relative aspect-2/1 min-h-36 max-h-144 overflow-hidden mx-auto">
-				<Image
-					src={globe}
-					alt="Globe marking Ahmedabad, Uttar Pradesh, and Lucknow"
-					fill
-					sizes="100vw"
-					className="object-cover object-top"
-				/>
-			</div>
 			<div className="container mx-auto grid items-start gap-8 px-2.5 py-6 md:py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12 lg:py-12 xl:gap-16 xl:py-16 2xl:gap-20 2xl:py-20">
 				<div className="flex flex-col gap-5">
 					<header className="space-y-3">
