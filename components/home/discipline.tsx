@@ -25,7 +25,7 @@ const Discipline = () => {
 							<Dot className="stroke-10" />
 							MULTI-AXIS 3D GYROSCOPE ACTIVE
 						</Badge>
-						<h3 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl text-secondary">
+						<h3 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl text-secondary text-center">
 							Four Disciplines.{" "}
 							<span className="italic text-primary">Unified Mastery.</span>
 						</h3>
