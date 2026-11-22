@@ -1,0 +1,120 @@
+.choose-reveal {
+	--choose-reveal-distance: clamp(220px, 55svh, 520px);
+}
+
+.choose-curtain {
+	isolation: isolate;
+}
+
+.choose-curtain > .home-section-stack {
+	position: relative;
+	z-index: 1;
+}
+
+@media (max-width: 47.999rem) {
+	.choose-card-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.choose-card-grid > .choose-card {
+		grid-column: auto;
+	}
+
+	.choose-card-grid > .choose-card:is(:first-child, :nth-child(6), :nth-child(7)) {
+		grid-column: 1 / -1;
+	}
+
+	.choose-card-detail {
+		display: none;
+	}
+
+	.choose-card article {
+		display: grid;
+		grid-template-columns: 40px minmax(0, 1fr);
+		align-content: start;
+		align-items: center;
+		padding: 16px;
+		gap: 12px;
+	}
+
+	.choose-card article > span:first-child {
+		grid-column: 1;
+		grid-row: 1;
+		width: 40px;
+		height: 40px;
+	}
+
+	.choose-card-content {
+		display: contents;
+	}
+
+	.choose-card h4 {
+		grid-column: 2;
+		grid-row: 1;
+		margin-top: 0;
+		font-size: 16px;
+	}
+
+	.choose-card-chips,
+	.choose-card-status {
+		grid-column: 1 / -1;
+		margin-top: 0;
+	}
+
+	.choose-card-status {
+		justify-self: start;
+	}
+}
+
+.choose-reveal-circle {
+	inset-inline-start: 50%;
+	top: min(44svh, 50%);
+	width: 210vmax;
+	aspect-ratio: 1;
+	translate: -50% -50%;
+}
+
+.choose-reveal:not([data-choose-motion]) :is(.choose-reveal-final, .choose-reveal-surface) {
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+.choose-reveal:not([data-choose-motion]) :is(.choose-reveal-placeholder, .choose-reveal-circle) {
+	display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.choose-curtain > .choose-reveal {
+		margin-top: -100svh;
+	}
+
+	.choose-curtain .choose-reveal-track {
+		top: 50svh;
+	}
+
+	.choose-reveal-panel {
+		position: sticky;
+		top: 0;
+		min-height: 100svh;
+	}
+
+	.choose-reveal-track {
+		height: var(--choose-reveal-distance);
+	}
+
+	.choose-reveal-runway {
+		height: calc(var(--choose-reveal-distance) + 50svh);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.choose-reveal :is(.choose-reveal-final, .choose-reveal-surface) {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
+	.choose-reveal :is(.choose-reveal-placeholder, .choose-reveal-circle, .choose-reveal-runway) {
+		display: none;
+	}
+}

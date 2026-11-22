@@ -23,6 +23,7 @@ export default function Home() {
 		<>
 			<HomeIntro />
 			<Banner />
+			<div className="choose-curtain">
 			<HomeSectionStack
 				sections={[
 					{
@@ -43,6 +44,7 @@ export default function Home() {
 				]}
 			/>
 			<Choose />
+			</div>
 			<Locations />
 			<Campaign />
 		</>

@@ -11,6 +11,7 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
+import { ChooseReveal, ChooseRevealCard } from "./choose-reveal";
 
 type ChooseCardProps = {
 	icon: LucideIcon;
@@ -23,6 +24,7 @@ type ChooseCardProps = {
 };
 
 function ChooseCard({
+	index,
 	icon: Icon,
 	label,
 	title,
@@ -30,11 +32,12 @@ function ChooseCard({
 	variant,
 	tags,
 	status,
-}: ChooseCardProps) {
+}: ChooseCardProps & { index: number }) {
 	return (
-		<div
+		<ChooseRevealCard
+			index={index}
 			className={cn(
-				"@container/card grid min-w-0",
+				"choose-card @container/card grid min-w-0",
 				variant === "featured" && "@min-[30rem]/choose:col-span-2",
 				variant === "wide" && "col-span-full",
 			)}
@@ -51,18 +54,18 @@ function ChooseCard({
 				<span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/20 text-primary @min-[18rem]/card:size-12">
 					<Icon aria-hidden="true" className="size-5" />
 				</span>
-				<div className="min-w-0 flex-1">
-					<p className="text-xs font-bold tracking-wider uppercase text-primary">
+				<div className="choose-card-content min-w-0 flex-1">
+					<p className="choose-card-detail text-xs font-bold tracking-wider uppercase text-primary">
 						{label}
 					</p>
 					<h4 className="mt-2 text-lg leading-tight font-bold wrap-break-word @min-[18rem]/card:text-xl">
 						{title}
 					</h4>
-					<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+					<p className="choose-card-detail mt-2 text-sm leading-relaxed text-muted-foreground">
 						{description}
 					</p>
 					{tags && (
-						<ul aria-label="Industries" className="mt-3 flex flex-wrap gap-2">
+						<ul aria-label="Industries" className="choose-card-chips mt-3 flex flex-wrap gap-2">
 							{tags.map((tag) => (
 								<li
 									key={tag}
@@ -75,7 +78,7 @@ function ChooseCard({
 					)}
 				</div>
 				{status && (
-					<span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-xs font-semibold text-success">
+					<span className="choose-card-status inline-flex shrink-0 items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-xs font-semibold text-success">
 						<span
 							aria-hidden="true"
 							className="size-1.5 rounded-full bg-current"
@@ -84,7 +87,7 @@ function ChooseCard({
 					</span>
 				)}
 			</article>
-		</div>
+		</ChooseRevealCard>
 	);
 }
 
@@ -154,40 +157,31 @@ const cards: ChooseCardProps[] = [
 
 const Choose = () => {
 	return (
-		<>
-			<section className="dark bg-surface text-foreground 2xl:py-20 xl:py-16 lg:py-12 md:py-8 py-6 relative overflow-clip">
-				<div className="size-157 rounded-full bg-secondary-foreground z-1 blur-[230px] absolute -top-80 -right-80" />
-				<Image
-					src={grid}
-					alt=""
-					title=""
-					fill
-					sizes="100vw"
-					className="opacity-54 grayscale z-0"
-				/>
-				<div className="@container/choose container mx-auto px-2.5 flex flex-col 2xl:gap-20 xl:gap-16 lg:gap-12 gap-8 relative z-2">
-					<div className="flex flex-col gap-4 max-w-3xl mx-auto">
-						<span className="font-bold text-sm text-primary text-center">
-							ENTERPRISE EDGE & PROVEN AUTHORITY
-						</span>
-						<h3 className="font-extrabold text-center 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl">
-							WHY CHOOSE <span className="italic text-primary">ADMR</span>{" "}
-							TECHNOLOGIES?
-						</h3>
-						<p className="md:text-lg text-base font-normal text-muted-foreground text-center">
-							Our core architectural pillars synthesize planning, aggressive
-							negotiation, and rigorous cross-platform tracking into one
-							seamless partner engagement.
-						</p>
-					</div>
-					<div className="grid grid-cols-1 gap-4 @min-[30rem]/choose:grid-cols-2 @min-[42rem]/choose:grid-cols-4">
-						{cards.map((card) => (
-							<ChooseCard key={card.label} {...card} />
-						))}
-					</div>
+		<ChooseReveal
+			texture={<Image src={grid} alt="" fill sizes="100vw" className="opacity-54 grayscale" />}
+			heading={
+				<div className="flex flex-col gap-4 max-w-3xl mx-auto">
+					<span className="font-bold text-sm text-primary text-center">
+						ENTERPRISE EDGE & PROVEN AUTHORITY
+					</span>
+					<h3 className="font-extrabold text-center 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl">
+						WHY CHOOSE <span className="italic text-primary">ADMR</span>{" "}
+						TECHNOLOGIES?
+					</h3>
+					<p className="md:text-lg text-base font-normal text-muted-foreground text-center">
+						Our core architectural pillars synthesize planning, aggressive
+						negotiation, and rigorous cross-platform tracking into one
+						seamless partner engagement.
+					</p>
 				</div>
-			</section>
-		</>
+			}
+		>
+			<div className="choose-card-grid grid grid-cols-1 gap-4 @min-[30rem]/choose:grid-cols-2 @min-[42rem]/choose:grid-cols-4">
+				{cards.map((card, index) => (
+					<ChooseCard key={card.label} index={index} {...card} />
+				))}
+			</div>
+		</ChooseReveal>
 	);
 };
 
