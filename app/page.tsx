@@ -12,25 +12,39 @@ import Media from "@/components/home/media";
 import { siteOpenGraph, siteUrl } from "@/lib/site-metadata";
 
 export const metadata: Metadata = siteUrl
-  ? { alternates: { canonical: siteUrl }, openGraph: { ...siteOpenGraph, url: siteUrl } }
-  : {};
+	? {
+			alternates: { canonical: siteUrl },
+			openGraph: { ...siteOpenGraph, url: siteUrl },
+		}
+	: {};
 
 export default function Home() {
-  return (
-    <>
-      <HomeIntro />
-      <Banner />
-      <HomeSectionStack
-        sections={[
-          { id: "media-buying", content: <Discipline /> },
-          { id: "digital-marketing", content: <Marketing /> },
-          { id: "releasing-agency", content: <Agency /> },
-          { id: "media-pr", content: <Media /> },
-        ]}
-        followingSection={<Choose />}
-      />
-      <Locations />
-      <Campaign />
-    </>
-  );
+	return (
+		<>
+			<HomeIntro />
+			<Banner />
+			<HomeSectionStack
+				sections={[
+					{
+						id: "media-buying",
+						surface: "surface",
+						content: <Discipline />,
+					},
+					{
+						id: "digital-marketing",
+						content: <Marketing />,
+					},
+					{
+						id: "releasing-agency",
+						surface: "secondary",
+						content: <Agency />,
+					},
+					{ id: "media-pr", content: <Media /> },
+				]}
+			/>
+			<Choose />
+			<Locations />
+			<Campaign />
+		</>
+	);
 }

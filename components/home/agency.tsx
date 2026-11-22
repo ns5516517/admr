@@ -37,7 +37,7 @@ const Agency = () => {
 							button={{className: "text-primary"}}
 						/>
 
-						<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-4 max-sm:hidden">
 							<span className="text-background font-bold text-sm">
 								RELEASING INFRASTRUCTURE:
 							</span>

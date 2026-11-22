@@ -32,16 +32,19 @@ const SectionHeader = ({
 	} = button ?? {};
 	return (
 		<>
-			<div className={cn("flex gap-3 justify-between flex-wrap", className)}>
+			<div data-section-stack-header="" className={cn("flex gap-3 justify-between flex-wrap", className)}>
 				<div className="flex flex-col">
-					<div
-						className={cn(
-							"font-normal text-foreground 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl",
-							titleClass,
-						)}
-						{...titleProps}
-					>
-						{title.label}
+					<div data-section-title-slot="">
+						<div
+							data-section-title=""
+							className={cn(
+								"font-normal text-foreground 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl",
+								titleClass,
+							)}
+							{...titleProps}
+						>
+							{title.label}
+						</div>
 					</div>
 					<p
 						className={cn(
@@ -55,18 +58,21 @@ const SectionHeader = ({
 						dominant domestic and multinational channels.
 					</p>
 				</div>
-				<Button
-					className={cn(
-						"xl:text-2xl md:text-xl text-lg font-bold",
-						buttonClass,
-					)}
-					variant={variant}
-					size={size}
-					{...buttonProps}
-				>
-					Scale Performance
-					<ArrowUpRight />
-				</Button>
+				<div data-section-action-slot="" className="flex shrink-0 self-start">
+					<Button
+						data-section-action=""
+						className={cn(
+							"xl:text-2xl md:text-xl text-lg font-bold",
+							buttonClass,
+						)}
+						variant={variant}
+						size={size}
+						{...buttonProps}
+					>
+						Scale Performance
+						<ArrowUpRight />
+					</Button>
+				</div>
 			</div>
 		</>
 	);

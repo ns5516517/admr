@@ -29,7 +29,7 @@ const Media = () => {
 							button={{ className: "text-secondary" }}
 						/>
 
-						<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-4 max-sm:hidden">
 							<span className="text-foreground font-bold text-sm">
 								PUBLIC RELATIONS SPECTRUM:
 							</span>

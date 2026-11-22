@@ -18,16 +18,16 @@ const Banner = () => {
 							ONE COMPANY. FOUR VERTICALS. COMPLETE MARKETING SOLUTIONS.
 						</Badge>
 						<div className="flex flex-col gap-4">
-							<h1 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl">
+							<h1 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl text-3xl">
 								Architecting{" "}
 								<span className="font-medium italic bg-primary/22 [text-box:trim-both_cap_text] text-[oklch(from_var(--primary)_l_calc(c*0.41)_h)]">
 									High-Impact
 								</span>
 							</h1>
-							<h2 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl text-primary">
+							<h2 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl text-3xl text-primary">
 								Media, Advertising & Performance
 							</h2>
-							<p className="xl:text-2xl md:text-xl text-lg text-background/70 max-w-210.75">
+							<p className="2xl:text-2xl lg:text-xl md:text-lg text-sm text-background/70 max-w-210.75">
 								ADMR Technologies is an integrated media and marketing solutions
 								powerhouse delivering end-to-end impact across global and
 								regional media landscapes. From strategic buys and physical
@@ -49,7 +49,7 @@ const Banner = () => {
 							</Button>
 						</div>
 					</div>
-					<div className="border-t grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 border-t-primary/40 pt-10">
+					<div className="border-t grid md:grid-cols-4 grid-cols-2 gap-4 border-t-primary/40 pt-10">
 						<div>
 							<span className="text-chart-1 xl:text-5xl lg:text-4xl md:text-3xl text-2xl flex items-center font-extrabold">
 								500 <span className="text-primary text-2xl">+</span>

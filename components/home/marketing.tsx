@@ -62,7 +62,7 @@ const Marketing = () => {
 							button={{ className: "text-secondary" }}
 						/>
 
-						<div className="grid sm:grid-cols-2 gap-4">
+						<div className="grid sm:grid-cols-2 gap-4 max-sm:hidden">
 							<MarkCard
 								items={[
 									"Google Search & PMax",
