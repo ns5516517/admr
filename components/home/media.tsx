@@ -14,7 +14,7 @@ import SectionImg from "../shared/section-img";
 const Media = () => {
 	return (
 		<>
-			<section className="bg-primary/24 2xl:pt-20 xl:pt-16 lg:pt-12 md:pt-8 pt-6">
+			<section id="media-pr" className="bg-primary/24 2xl:pt-20 xl:pt-16 lg:pt-12 md:pt-8 pt-6">
 				<div className="container mx-auto px-2.5 flex flex-col 2xl:gap-20 xl:gap-16 lg:gap-12 gap-8">
 					<div className="flex flex-col gap-7">
 						<SectionHeader
