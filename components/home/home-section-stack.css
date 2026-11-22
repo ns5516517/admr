@@ -1,0 +1,16 @@
+@media (prefers-reduced-motion: no-preference) {
+	.home-section-stack {
+		isolation: isolate;
+	}
+
+	.home-section-stack-panel {
+		position: sticky;
+		/* Tall panels scroll through their content before joining the stack. */
+		top: min(0px, 100svh - var(--home-section-height));
+		background: var(--background);
+	}
+
+	.home-section-stack-panel:has(:focus-visible) {
+		z-index: 1;
+	}
+}
