@@ -3,6 +3,7 @@ import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SiteFooter from "@/components/shared/site-footer";
+import { homeIntroBootstrap, homeIntroFirstPaint } from "@/components/home/home-intro-settings";
 
 const nunitoSansHeading = Nunito_Sans({subsets:['latin'],variable:'--font-heading'});
 
@@ -16,9 +17,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={cn("h-full", "antialiased", nunitoSansHeading.className)}
+      suppressHydrationWarning
     >
+      <head>
+        <style>{homeIntroFirstPaint}</style>
+        <script dangerouslySetInnerHTML={{ __html: homeIntroBootstrap }} />
+      </head>
       <body className="min-h-full flex flex-col">
-        <main className="flex-1">{children}</main>
+        <main id="site-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
         <SiteFooter />
       </body>
     </html>

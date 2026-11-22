@@ -1,0 +1,184 @@
+html[data-home-intro-pending] .home-intro {
+	display: block;
+	visibility: visible;
+}
+
+.home-intro {
+	--intro-mark-width: clamp(18px, 3.05vw, 46px);
+	--intro-gutter: clamp(5px, 1vw, 12px);
+	color: var(--foreground);
+}
+
+.home-intro::backdrop {
+	background: transparent;
+}
+
+.home-intro-scroll {
+	height: 100%;
+	overflow: hidden auto;
+	overscroll-behavior: contain;
+	scrollbar-width: none;
+	outline: none;
+}
+
+.home-intro-scroll[data-phase="zooming"] {
+	overflow-y: hidden;
+}
+
+.home-intro-scroll-content {
+	height: 182dvh;
+}
+
+.home-intro-stage {
+	position: sticky;
+	top: 0;
+	height: 100dvh;
+	overflow: clip;
+}
+
+.home-intro-stage::before {
+	position: absolute;
+	inset: var(--intro-gutter);
+	background: var(--surface);
+	content: "";
+}
+
+.home-intro-mark,
+.home-intro-wordmark {
+	position: absolute;
+	left: 50%;
+	pointer-events: none;
+}
+
+.home-intro-mark {
+	top: 45%;
+	width: var(--intro-mark-width);
+	translate: -50% -50%;
+}
+
+.home-intro-zoom {
+	transform-origin: 50% 82%;
+}
+
+.home-intro-mark-position {
+	transform: translate(-138.28%, -21dvh);
+}
+
+.home-intro-mark svg,
+.home-intro-wordmark svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
+.home-intro-wordmark {
+	top: calc(24% - var(--intro-mark-width) * 0.3566);
+	width: calc(var(--intro-mark-width) * 99 / 26.2881);
+	translate: -50% 0;
+	/* The moving mark supplies the A while the rest of the wordmark fades. */
+	clip-path: polygon(26.56% 0, 100% 0, 100% 100%, 0 100%, 0 62%, 26.56% 62%);
+}
+
+.home-intro-loading {
+	position: absolute;
+	top: 48%;
+	left: 50%;
+	width: min(50vw, 46rem);
+	min-width: min(70vw, 16rem);
+	translate: -50% 0;
+	text-align: center;
+	pointer-events: none;
+}
+
+.home-intro-scroll:not([data-phase="loading"]) .home-intro-status {
+	display: none;
+}
+
+.home-intro-loading-label {
+	font-size: clamp(0.67rem, 1.55vw, 1rem);
+	font-weight: 900;
+	letter-spacing: 0.85em;
+	text-indent: 0.85em;
+	text-transform: uppercase;
+}
+
+.home-intro-track {
+	height: clamp(0.36rem, 1.16vw, 0.7rem);
+	margin-top: clamp(0.65rem, 2.2dvh, 1.25rem);
+	border-radius: 999px;
+	overflow: hidden;
+	background: color-mix(in srgb, var(--secondary) 7%, var(--surface));
+}
+
+.home-intro-fill {
+	height: 100%;
+	border-radius: inherit;
+	background: var(--primary);
+	transform: scaleX(calc(var(--home-intro-progress, 0) / 100));
+	transform-origin: left;
+}
+
+.home-intro-number {
+	counter-reset: home-intro-progress var(--home-intro-progress, 0);
+	margin-top: clamp(0.65rem, 3.4dvh, 1.75rem);
+	color: color-mix(in srgb, var(--primary) 28%, var(--surface));
+	font-size: clamp(4rem, min(17vw, 23dvh), 12rem);
+	font-weight: 900;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: -0.045em;
+	line-height: 1;
+}
+
+.home-intro-number::before {
+	content: counter(home-intro-progress);
+}
+
+.home-intro-cue {
+	position: absolute;
+	top: 79%;
+	left: 50%;
+	translate: -50% -50%;
+	opacity: 0;
+}
+
+.home-intro-button {
+	min-width: 44px;
+	min-height: 44px;
+	height: auto;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 0.4rem 0.65rem;
+	color: inherit;
+	font-size: clamp(0.56rem, 0.98vw, 0.72rem);
+	font-weight: 900;
+	letter-spacing: 0.035em;
+	text-transform: uppercase;
+	touch-action: manipulation;
+	transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.home-intro-button:hover {
+	background: transparent;
+	color: inherit;
+}
+
+.home-intro-arrow {
+	display: grid;
+	width: 1.25rem;
+	aspect-ratio: 1;
+	place-items: center;
+	border: 3px solid color-mix(in srgb, var(--secondary) 8%, var(--surface));
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--secondary) 16%, var(--surface));
+	color: var(--secondary);
+}
+
+.home-intro-arrow::after {
+	width: 0.3rem;
+	aspect-ratio: 1;
+	border-right: 1px solid;
+	border-bottom: 1px solid;
+	transform: translateY(-1px) rotate(45deg);
+	content: "";
+}
