@@ -6,6 +6,7 @@ import {
 	useContext,
 	useEffect,
 	useRef,
+	useSyncExternalStore,
 	type ReactNode,
 } from "react";
 import {
@@ -20,6 +21,14 @@ import {
 import "./locations-reveal.css";
 
 const Progress = createContext<MotionValue<number> | null>(null);
+const globeMediaQuery = "(min-width: 48rem)";
+const subscribeToGlobeViewport = (callback: () => void) => {
+	const media = window.matchMedia(globeMediaQuery);
+	media.addEventListener("change", callback);
+	return () => media.removeEventListener("change", callback);
+};
+const hasGlobeViewport = () => window.matchMedia(globeMediaQuery).matches;
+const serverGlobeViewport = () => false;
 const places = [
 	{
 		id: "noida",
@@ -295,15 +304,22 @@ function LocationGlobe({ progress }: { progress: MotionValue<number> }) {
 }
 
 export function LocationsReveal({ children }: { children: ReactNode }) {
+	const showGlobe = useSyncExternalStore(subscribeToGlobeViewport, hasGlobeViewport, serverGlobeViewport);
 	const section = useRef<HTMLElement>(null);
 	const track = useRef<HTMLDivElement>(null);
 	const cards = useRef<HTMLDivElement>(null);
 	const finalY = useMotionValue(0);
 	const initialY = useMotionValue(0);
-	const { scrollYProgress: progress } = useScroll({
+	const compactTimeline = useMotionValue(false);
+	const { scrollYProgress } = useScroll({
 		target: track,
-		offset: ["start start", "end start"],
+		offset: ["start 55%", "end start"],
 	});
+	// Mobile starts directly with the heading and card reveal stages.
+	const progress = useTransform(() => compactTimeline.get()
+		? transform(scrollYProgress.get(), [0, 1], [0.68, 1])
+		: scrollYProgress.get());
+
 	const y = useTransform(() =>
 		transform(
 			progress.get(),
@@ -320,11 +336,12 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 		if (!element || !content) return;
 		const measure = () => {
 			const width = Math.min(element.clientWidth, 1200);
-			initialY.set(Math.max(0, (window.innerHeight - width) / 2));
+			const compact = window.matchMedia("(max-width: 47.999rem)").matches;
+			compactTimeline.set(compact);
+			initialY.set(compact ? 16 : Math.max(0, (window.innerHeight - width) / 2));
 			finalY.set(content.offsetHeight);
 		};
 		measure();
-		element.setAttribute("data-locations-motion", "");
 		const resize = new ResizeObserver(measure);
 		resize.observe(content);
 		resize.observe(element);
@@ -332,9 +349,8 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 		return () => {
 			resize.disconnect();
 			window.removeEventListener("resize", measure);
-			element.removeAttribute("data-locations-motion");
 		};
-	}, [finalY, initialY]);
+	}, [compactTimeline, finalY, initialY]);
 
 	return (
 		<Progress.Provider value={progress}>
@@ -342,6 +358,7 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 				ref={section}
 				aria-labelledby="locations-heading"
 				className="locations-reveal relative bg-surface"
+				data-locations-motion=""
 			>
 				<div
 					ref={track}
@@ -371,10 +388,11 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 					</div>
 					<div className="locations-globe-space" aria-hidden="true" />
 					<motion.div className="locations-globe-position" style={{ y }}>
-						<LocationGlobe progress={progress} />
+						{showGlobe && <LocationGlobe progress={progress} />}
 					</motion.div>
 				</div>
 				<div className="locations-reveal-runway" aria-hidden="true" />
+				<noscript><style>{".locations-reveal .locations-final { opacity: 1 !important; } .locations-reveal .locations-placeholder, .locations-reveal .locations-globe-space, .locations-reveal .locations-reveal-runway { display: none; } .locations-reveal .locations-reveal-stage { position: relative; }"}</style></noscript>
 			</section>
 		</Progress.Provider>
 	);
@@ -391,29 +409,24 @@ export function LocationRevealCard({
 }) {
 	const progress = useContext(Progress)!;
 	const start = 0.72 + index * 0.04;
-	const shellOpacity = useTransform(
-		progress,
-		[start, start + 0.04, 0.91, 1],
-		[0, 1, 1, 0],
-	);
+	const shellOpacity = useTransform(progress, [start, start + 0.04], [0, 1]);
 	const opacity = useTransform(
 		progress,
 		[0.87 + index * 0.02, 0.95 + index * 0.02],
 		[0, 1],
 	);
 	return (
-		<div className={`locations-card-shell grid min-w-0 ${className}`}>
+		<motion.div className={`locations-card-shell grid min-w-0 ${className}`} style={{ opacity: shellOpacity }}>
 			<motion.div
-				className="locations-final col-start-1 row-start-1 grid min-w-0"
+				className="locations-final relative z-1 col-start-1 row-start-1 grid min-w-0"
 				style={{ opacity }}
 			>
 				{children}
 			</motion.div>
-			<motion.div
+			<div
 				aria-hidden="true"
 				className="locations-placeholder pointer-events-none col-start-1 row-start-1 rounded-2xl bg-muted"
-				style={{ opacity: shellOpacity }}
 			/>
-		</div>
+		</motion.div>
 	);
 }

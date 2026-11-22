@@ -1,6 +1,15 @@
 .locations-reveal {
 	--locations-scroll-distance: 230svh;
 }
+@media (max-width: 47.999rem) {
+	.locations-reveal {
+		--locations-scroll-distance: 35svh;
+	}
+	.locations-reveal .locations-globe-space,
+	.locations-reveal .locations-globe-position {
+		display: none;
+	}
+}
 .locations-reveal-track {
 	position: absolute;
 	inset: 0 auto auto 0;
@@ -78,6 +87,11 @@
 .locations-reveal:not([data-locations-motion]) .locations-final {
 	opacity: 1 !important;
 }
+@media (scripting: none) {
+	.locations-reveal .locations-card-shell {
+		opacity: 1 !important;
+	}
+}
 .locations-reveal:not([data-locations-motion]) .locations-placeholder {
 	display: none;
 }
@@ -98,6 +112,15 @@
 	.locations-reveal-runway {
 		height: var(--locations-scroll-distance);
 	}
+	@media (max-width: 47.999rem) {
+		.locations-reveal-stage {
+			position: relative;
+			min-height: 0;
+		}
+		.locations-reveal-runway {
+			display: none;
+		}
+	}
 }
 @media (prefers-reduced-motion: reduce) {
 	.locations-reveal-track,
@@ -105,6 +128,7 @@
 	.locations-placeholder {
 		display: none;
 	}
+	.locations-card-shell,
 	.locations-final,
 	.locations-globe-label {
 		opacity: 1 !important;
