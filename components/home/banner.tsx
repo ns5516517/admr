@@ -10,13 +10,13 @@ const Banner = () => {
 			<div className="container mx-auto px-3 relative">
 				<div className="flex flex-col gap-12">
 					<div className="flex flex-col gap-5">
-						<Badge
+						{/* <Badge
 							className="uppercase whitespace-normal bg-muted/13 text-background hover:bg-muted/15 hover:text-background [&>svg]:size-5! h-8.5 px-4 font-extrabold tracking-wider"
 							variant={"ghost"}
 						>
 							<DotIcon className="stroke-6 text-primary" />
 							ONE COMPANY. FOUR VERTICALS. COMPLETE MARKETING SOLUTIONS.
-						</Badge>
+						</Badge> */}
 						<div className="flex flex-col gap-4">
 							<h1 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl text-3xl">
 								Architecting{" "}

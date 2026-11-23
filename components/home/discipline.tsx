@@ -18,13 +18,13 @@ const Discipline = () => {
 			<section className="bg-surface 2xl:pt-20 xl:pt-16 lg:pt-12 md:pt-8 pt-6">
 				<div className="container mx-auto px-2.5 flex flex-col 2xl:gap-20 xl:gap-16 lg:gap-12 gap-8">
 					<div className="flex flex-col justify-center items-center md:gap-4 gap-2">
-						<Badge
+						{/* <Badge
 							className="font-bold shadow h-6.5 px-3 [&_svg]:text-primary"
 							variant={"accent"}
 						>
 							<Dot className="stroke-10" />
 							MULTI-AXIS 3D GYROSCOPE ACTIVE
-						</Badge>
+						</Badge> */}
 						<h3 className="font-extrabold 2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl text-2xl text-secondary text-center">
 							Four Disciplines.{" "}
 							<span className="italic text-primary">Unified Mastery.</span>
