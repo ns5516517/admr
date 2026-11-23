@@ -1,10 +1,8 @@
 .locations-reveal {
-	--locations-scroll-distance: 230svh;
+	/* --locations-scroll-distance: 230svh; Desktop globe timeline */
+	--locations-scroll-distance: 35svh;
 }
 @media (max-width: 47.999rem) {
-	.locations-reveal {
-		--locations-scroll-distance: 35svh;
-	}
 	.locations-reveal .locations-globe-space,
 	.locations-reveal .locations-globe-position {
 		display: none;
@@ -106,20 +104,14 @@
 }
 @media (prefers-reduced-motion: no-preference) {
 	.locations-reveal-stage {
-		position: sticky;
-		top: 0;
+		/* position: sticky;
+		top: 0; */
+		position: relative;
+		min-height: 0;
 	}
 	.locations-reveal-runway {
-		height: var(--locations-scroll-distance);
-	}
-	@media (max-width: 47.999rem) {
-		.locations-reveal-stage {
-			position: relative;
-			min-height: 0;
-		}
-		.locations-reveal-runway {
-			display: none;
-		}
+		/* height: var(--locations-scroll-distance); */
+		display: none;
 	}
 }
 @media (prefers-reduced-motion: reduce) {

@@ -1,26 +1,27 @@
 "use client";
 
-import createGlobe, { type Globe } from "cobe";
+// import createGlobe, { type Globe } from "cobe";
 import {
 	createContext,
 	useContext,
-	useEffect,
+	// useEffect,
 	useRef,
-	useSyncExternalStore,
+	// useSyncExternalStore,
 	type ReactNode,
 } from "react";
 import {
 	motion,
-	useMotionValue,
+	// useMotionValue,
 	useScroll,
 	useTransform,
-	easeInOut,
-	transform,
+	// easeInOut,
+	// transform,
 	type MotionValue,
 } from "motion/react";
 import "./locations-reveal.css";
 
 const Progress = createContext<MotionValue<number> | null>(null);
+/* Desktop globe is temporarily disabled.
 const globeMediaQuery = "(min-width: 48rem)";
 const subscribeToGlobeViewport = (callback: () => void) => {
 	const media = window.matchMedia(globeMediaQuery);
@@ -303,19 +304,27 @@ function LocationGlobe({ progress }: { progress: MotionValue<number> }) {
 	);
 }
 
+*/
+
 export function LocationsReveal({ children }: { children: ReactNode }) {
+	/*
 	const showGlobe = useSyncExternalStore(subscribeToGlobeViewport, hasGlobeViewport, serverGlobeViewport);
 	const section = useRef<HTMLElement>(null);
-	const track = useRef<HTMLDivElement>(null);
 	const cards = useRef<HTMLDivElement>(null);
 	const finalY = useMotionValue(0);
 	const initialY = useMotionValue(0);
 	const compactTimeline = useMotionValue(false);
+	*/
+	const track = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useScroll({
 		target: track,
 		offset: ["start 55%", "end start"],
 	});
-	// Mobile starts directly with the heading and card reveal stages.
+	// Start directly with the heading and card reveal stages while the globe is disabled.
+	const progress = useTransform(scrollYProgress, [0, 1], [0.68, 1]);
+	const headingOpacity = useTransform(progress, [0.68, 0.8], [0, 1]);
+
+	/*
 	const progress = useTransform(() => compactTimeline.get()
 		? transform(scrollYProgress.get(), [0, 1], [0.68, 1])
 		: scrollYProgress.get());
@@ -328,7 +337,6 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 			{ ease: easeInOut },
 		),
 	);
-	const headingOpacity = useTransform(progress, [0.68, 0.8], [0, 1]);
 
 	useEffect(() => {
 		const element = section.current;
@@ -351,11 +359,11 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 			window.removeEventListener("resize", measure);
 		};
 	}, [compactTimeline, finalY, initialY]);
+	*/
 
 	return (
 		<Progress.Provider value={progress}>
 			<section
-				ref={section}
 				aria-labelledby="locations-heading"
 				className="locations-reveal relative bg-surface"
 				data-locations-motion=""
@@ -366,7 +374,7 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 					className="locations-reveal-track"
 				/>
 				<div className="locations-reveal-stage">
-					<div ref={cards} className="locations-reveal-cards">
+					<div className="locations-reveal-cards">
 						<motion.header
 							className="locations-heading locations-final mx-auto flex max-w-3xl flex-col gap-3 px-2.5 pt-6 text-center sm:gap-4 md:pt-8 lg:pt-12 xl:pt-16 2xl:pt-20"
 							style={{ opacity: headingOpacity }}
@@ -386,10 +394,12 @@ export function LocationsReveal({ children }: { children: ReactNode }) {
 						</motion.header>
 						{children}
 					</div>
+					{/*
 					<div className="locations-globe-space" aria-hidden="true" />
 					<motion.div className="locations-globe-position" style={{ y }}>
 						{showGlobe && <LocationGlobe progress={progress} />}
 					</motion.div>
+					*/}
 				</div>
 				<div className="locations-reveal-runway" aria-hidden="true" />
 				<noscript><style>{".locations-reveal .locations-final { opacity: 1 !important; } .locations-reveal .locations-placeholder, .locations-reveal .locations-globe-space, .locations-reveal .locations-reveal-runway { display: none; } .locations-reveal .locations-reveal-stage { position: relative; }"}</style></noscript>
