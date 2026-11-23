@@ -40,8 +40,8 @@ export default function SiteFooter() {
 					<nav aria-label="Footer navigation" className="space-y-1 text-sm font-bold tracking-wide uppercase">
 						{footerLinkGroups.map((links) => (
 							<ul key={links[0].href} className="flex flex-wrap items-center gap-x-6 gap-y-1">
-								{links.map(({ label, href }) => (
-									<li key={href}>
+								{links.map(({ label, href }, i) => (
+									<li key={href + i}>
 										<Link href={href} className={linkClassName}>{label}</Link>
 									</li>
 								))}
@@ -51,7 +51,7 @@ export default function SiteFooter() {
 				</div>
 				<div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-border pt-4 text-xs text-muted-foreground">
 					<p className="uppercase">
-						© 2026 ADMR Technologies. Architectural Media &amp; Intelligence.
+						© {new Date().getFullYear()} ADMR Technologies. Architectural Media &amp; Intelligence.
 						All rights reserved.
 					</p>
 					<ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -59,7 +59,7 @@ export default function SiteFooter() {
 							<span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-success" />
 							All Media Networks Operational
 						</li>
-						<li>ISO 9001:2015 Certified Media Partner</li>
+						<li>ISO 9001:{new Date().getFullYear()} Certified Media Partner</li>
 					</ul>
 				</div>
 			</div>
