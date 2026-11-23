@@ -37,7 +37,7 @@ const Discipline = () => {
 
 					<div className="flex flex-col gap-7">
 						<SectionHeader
-							title={{ label: " MEDIA BUYING" }}
+							title={{ label: "MEDIA BUYING" }}
 							description={{
 								label:
 									"Strategic media planning and buying to ensure maximum brand visibility, audience reach, and cost-effective advertising across dominant domestic and multinational channels.",

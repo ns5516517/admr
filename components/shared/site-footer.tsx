@@ -7,11 +7,11 @@ const footerLinkGroups = [
 		{ label: "Releasing Agency", href: "/#releasing-agency" },
 		{ label: "Digital Marketing", href: "/#digital-marketing" },
 		{ label: "Media PR", href: "/#media-pr" },
-		{ label: "Case Studies", href: "/case-studies" },
+		{ label: "Case Studies", href: "/" },
 	],
 	[
-		{ label: "Privacy Architecture", href: "/privacy-architecture" },
-		{ label: "Terms of Engagement", href: "/terms-of-engagement" },
+		{ label: "Privacy Architecture", href: "/" },
+		{ label: "Terms of Engagement", href: "/" },
 	],
 ];
 
